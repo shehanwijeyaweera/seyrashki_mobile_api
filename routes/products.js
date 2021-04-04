@@ -6,7 +6,12 @@ const mongoose = require("mongoose");
 
 //get all products
 router.get(`/`, async (req, res) => {
-  const productList = await Product.find().populate("category");
+  let filter = {};
+  if (req.query.categories)
+  {
+     filter = { category: req.query.categories.split(',') }
+  }
+  const productList = await Product.find(filter).populate("category");
   //below code snippet can be used to display only the required fields of data
   // by using (-) we can exclude id
   //const productList = await Product.find().select('name image -_id');
