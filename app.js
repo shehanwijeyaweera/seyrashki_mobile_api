@@ -14,6 +14,7 @@ app.options("*", cors());
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(authJwt()); //checking if jwt token before handling the api request
+app.use("/public/uploads", express.static(__dirname + "/public/uploads")); // making uplaod folder a static path to allow users to view images
 app.use(errorHandler); // server error message handler 
 
 //Routes
